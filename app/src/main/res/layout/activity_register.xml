@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Username"
+        android:text="E-Mail Address"
         android:labelFor="@+id/email"
         android:textStyle="bold"/>
     <EditText
