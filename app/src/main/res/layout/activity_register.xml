@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="LOGIN"
+        android:text="REGISTER"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textAlignment="center"/>
 
@@ -59,18 +59,18 @@
     <Button
         android:layout_marginTop="50dp"
         android:layout_marginHorizontal="30dp"
-        android:id="@+id/login"
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Register"
         android:backgroundTint="@color/button_background_color"
         android:textColor="@color/button_text_color"/>
     <TextView
         android:layout_marginTop="10dp"
-        android:id="@+id/textRegister"
+        android:id="@+id/textLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tidak Punya Akun? Harap Registrasi Akun Terlebih Dahulu!"
+        android:text="Sudah Memiliki Akun? Klik Untuk Login dengan akun Anda!"
         android:textAlignment="center" />
 
 
