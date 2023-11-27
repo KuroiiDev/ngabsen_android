@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "230464419560",
+    "project_id": "ngabsen-smk",
+    "storage_bucket": "ngabsen-smk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230464419560:android:065bb9028df3e7ced3bb5d",
+        "android_client_info": {
+          "package_name": "com.example.ngab_sen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrnaACZwxuolD6xZl0ae9YlDH7_uP6K20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
