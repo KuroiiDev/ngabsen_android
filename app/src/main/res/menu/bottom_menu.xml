@@ -9,7 +9,7 @@
         android:title=""/>
 
     <item
-        android:id="@+id/list"
-        android:title="List"
-        android:icon="@drawable/list_icon_light" />
+        android:id="@+id/account"
+        android:title="Account"
+        android:icon="@drawable/account_icon_light"/>
 </menu>

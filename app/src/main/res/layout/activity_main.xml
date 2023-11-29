@@ -40,21 +40,8 @@
         android:src="@drawable/add_icon_light"
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="55dp"
-        android:tint="@color/main"/>
+        app:tint="@color/purple_700"/>
 
-<!--    <TextView-->
-<!--        android:id="@+id/userDetails"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textStyle="bold"-->
-<!--        android:text="MAIN"-->
-<!--        android:textAppearance="@style/TextAppearance.AppCompat.Body2"-->
-<!--        android:textAlignment="center"/>-->
-<!--    <Button-->
-<!--        android:id="@+id/logout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Logout"/>-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
