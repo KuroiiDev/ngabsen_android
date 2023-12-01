@@ -12,9 +12,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         app:cardCornerRadius="30dp"
-        app:cardElevation="20dp"
+        app:cardElevation="30dp"
         android:background="@drawable/custom_edittexts">
 
         <LinearLayout
@@ -30,7 +30,7 @@
                 android:textStyle="bold"
                 android:text="LOGIN"
                 android:textSize="36sp"
-                android:textColor="@color/purple_500"
+                android:textColor="#6C63FF"
                 android:textAlignment="center"/>
             <EditText
                 android:id="@+id/email"
@@ -55,15 +55,40 @@
                 android:padding="8dp"
                 android:layout_marginTop="20dp"/>
             <Button
-                android:layout_marginTop="50dp"
-                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="20dp"
                 android:id="@+id/login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:text="Login"
                 android:backgroundTint="@color/button_background_color"
-                android:textColor="@color/button_text_color"/>
+                android:textColor="@color/button_text_color"
+                app:cornerRadius = "20dp"/>
+            <ProgressBar
+                android:layout_marginTop="20dp"
+                android:id="@+id/progressBar"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible" />
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="30dp"
+        android:background="@drawable/custom_edittexts">
+        <TextView
+            android:layout_margin="10dp"
+            android:id="@+id/textRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tidak Punya Akun? Harap Registrasi Akun Dahulu!"
+            android:textAlignment="center"/>
     </androidx.cardview.widget.CardView>
 
     <!--
