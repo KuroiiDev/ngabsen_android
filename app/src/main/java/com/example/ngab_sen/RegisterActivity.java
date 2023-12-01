@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText textEmail, textPassword;
+    EditText textEmail, textPassword, textConfirm;
     TextView textView;
     Button button;
     FirebaseAuth mAuth;
@@ -39,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         button = findViewById(R.id.register);
         textEmail = findViewById(R.id.email);
         textPassword = findViewById(R.id.password);
+        textConfirm = findViewById(R.id.con_password);
         progressBar = findViewById(R.id.progressBar);
 
         textView.setOnClickListener(new View.OnClickListener() {
@@ -51,16 +52,23 @@ public class RegisterActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                String email, password;
+                String email, password, confirm;
                 email = textEmail.getText().toString();
                 password = textPassword.getText().toString();
+                confirm = textConfirm.getText().toString();
 
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter your email address", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     return;
                 }else if (TextUtils.isEmpty(password)){
                     Toast.makeText(getApplicationContext(), "Enter your password", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    return;
+                } else if (!(confirm.equals(password))) {
+                    Toast.makeText(getApplicationContext(), "Confirm Password Different", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     return;
                 }
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener( new OnCompleteListener<AuthResult>(){

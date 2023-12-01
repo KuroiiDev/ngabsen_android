@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".LoginActivity"
     android:orientation="vertical"
     android:background="@drawable/bg_login"
     android:paddingHorizontal="10dp">
@@ -29,10 +29,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="LOGIN"
+                android:text="Login"
                 android:textSize="36sp"
                 android:textColor="#6C63FF"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-condensed-light"/>
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
@@ -57,16 +58,18 @@
                 android:layout_marginTop="20dp"/>
             <Button
                 android:layout_marginTop="30dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="25dp"
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="Login"
+                android:textSize="18sp"
                 android:backgroundTint="@color/button_background_color"
                 android:textColor="@color/button_text_color"
-                app:cornerRadius = "20dp"/>
+                app:cornerRadius = "20dp"
+                android:drawableRight="@drawable/play_icon"/>
             <ProgressBar
-                android:layout_marginTop="20dp"
+                android:layout_marginVertical="20dp"
                 android:id="@+id/progressBar"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
@@ -79,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="9dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="30dp"
         android:background="@drawable/custom_edittexts">
@@ -91,61 +94,5 @@
             android:text="Tidak Punya Akun? Harap Registrasi Akun Dahulu!"
             android:textAlignment="center"/>
     </androidx.cardview.widget.CardView>
-
-    <!--
-
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="253dp"
-        android:paddingTop="20dp"
-        app:srcCompat="@drawable/login_banner" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="E-Mail Address"
-        android:labelFor="@+id/email"
-        android:textStyle="bold"/>
-
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Password"
-        android:labelFor="@+id/password"
-        android:textStyle="bold"/>
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
-
-
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/textRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tidak Punya Akun? Harap Registrasi Akun Terlebih Dahulu!"
-        android:textAlignment="center" />-->
-
 
 </LinearLayout>
