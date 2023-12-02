@@ -17,17 +17,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-//    FirebaseAuth auth;
-//    Button button;
-//    TextView textView;
-//    FirebaseUser user;
     ActivityMainBinding binding;
+    Button absenButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+        absenButton.findViewById(R.id.absButton);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -44,26 +42,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
         });
-
-//        auth = FirebaseAuth.getInstance();
-//        button = (Button) findViewById(R.id.logout);
-//        textView = (TextView) findViewById(R.id.userDetails);
-//        user = auth.getCurrentUser();
-//        if (user == null) {
-//            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-//            finish();
-//        }else {
-//            textView.setText(user.getEmail());
-//        }
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                FirebaseAuth.getInstance().signOut();
-//                if (auth.getCurrentUser() == null) {
-//                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-//                    finish();
-//                }
-//            }
-//        });
+        absenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MapActivity.class));
+                finish();
+            }
+        });
     }
     private void replaceFragment(Fragment fragment){
         FragmentManager fm = getSupportFragmentManager();

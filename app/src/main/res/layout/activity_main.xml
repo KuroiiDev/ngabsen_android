@@ -39,6 +39,7 @@
         android:backgroundTint="@color/white"
         android:src="@drawable/add_icon_light"
         app:layout_anchor="@id/bottomAppBar"
+        android:id="@+id/absButton"
         app:maxImageSize="55dp"
         app:tint="@color/purple_700"/>
 
