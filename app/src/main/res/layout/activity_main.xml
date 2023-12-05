@@ -29,19 +29,20 @@
             android:layout_marginEnd="20dp"
             app:labelVisibilityMode="labeled"
             android:background="@android:color/transparent"
-            app:menu="@menu/bottom_menu"/>
+            app:menu="@menu/bottom_menu" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/add_icon_light"
-        app:layout_anchor="@id/bottomAppBar"
-        android:id="@+id/absButton"
-        app:maxImageSize="55dp"
-        app:tint="@color/purple_700"/>
+    <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+           android:id="@+id/absButton"
+           android:onClick="testButton"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:backgroundTint="@color/white"
+           android:src="@drawable/add_icon_light"
+           app:layout_anchor="@id/bottomAppBar"
+           app:maxImageSize="55dp"
+         app:tint="@color/purple_700"/>-->
 
 
 

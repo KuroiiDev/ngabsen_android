@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/absen"
+        android:title="Absen"
+        android:icon="@drawable/add_icon_light"/>
     <item
         android:id="@+id/home"
         android:title="Home"
         android:icon="@drawable/home_icon_light" />
-
-    <item
-        android:title=""/>
-
     <item
         android:id="@+id/account"
         android:title="Account"
