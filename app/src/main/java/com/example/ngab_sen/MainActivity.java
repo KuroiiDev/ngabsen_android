@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.absen:
                         //replaceFragment(new AbsenFragment());
                         startActivity(new Intent(getApplicationContext(), MapActivity.class));
-                        finish();
                         break;
 
                     case R.id.account:

@@ -21,6 +21,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.example.ngab_sen.databinding.ActivityMapBinding;
@@ -32,6 +33,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private ActivityMapBinding binding;
     static final int REQUEST_LOCATION_PERMISSION=1;
     FusedLocationProviderClient fusedLocationProviderClient;
+    Marker mm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +51,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-//        LatLng solo = new LatLng(-7.55, 110.82);
-//        mMap.addMarker(new MarkerOptions().position(solo).title("Marker in Solo"));
-//        float zoom = 15;
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(solo,zoom));
         getLocation();
     }
     private void getLocation(){
@@ -65,13 +61,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             fusedLocationProviderClient.requestLocationUpdates(getLocationRequest(), new LocationCallback() {
                 @Override
                 public void onLocationResult(@NonNull LocationResult locationResult) {
+                    if (mm!=null){
+                        mm.remove();
+                    }
                     Location location = locationResult.getLastLocation();
                     if (location != null) {
                         String lat = location.getLatitude()+"";
                         String lng = location.getLongitude()+"";
                         LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-                        mMap.addMarker(new MarkerOptions().position(loc)
-                                .title("LAT: "+lat+" - LNG: "+lng));
+                        mm =mMap.addMarker(new MarkerOptions().position(loc).title("LAT: "+lat+" - LNG: "+lng));
                         float zoom = 15;
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc,zoom));
                         new GetAddressTask(MapActivity.this, MapActivity.this).execute(location);
