@@ -7,7 +7,11 @@ import androidx.core.app.ActivityCompat;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +36,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private TextView locationTextView;
     private ActivityMapBinding binding;
     static final int REQUEST_LOCATION_PERMISSION=1;
+    private Spinner spinner;
     FusedLocationProviderClient fusedLocationProviderClient;
     Marker mm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding = ActivityMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -47,6 +53,26 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        spinner = (Spinner) findViewById(R.id.spinKelas);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.kelas, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        if (spinner == null) {
+            Toast.makeText(getApplicationContext(), "Spinner Null!!!", Toast.LENGTH_SHORT).show();
+        }else {
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                    Toast.makeText(getApplicationContext(), adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        }
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
