@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    FloatingActionButton btnHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +39,22 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setSelectedItemId(R.id.home);
         binding.bottomNavigationView.setOnItemSelectedListener(item ->{
                 switch (item.getItemId()) {
-                    case R.id.home:
-                        replaceFragment(new HomeFragment());
-                        break;
-
                     case R.id.absen:
-                        //replaceFragment(new AbsenFragment());
+                        //replaceFragment(new HomeFragment());
                         startActivity(new Intent(getApplicationContext(), MapActivity.class));
                         break;
-
                     case R.id.account:
                         replaceFragment(new AccountFragment());
                         break;
                 }
                 return true;
+        });
+        btnHome = findViewById(R.id.btnHome);
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new HomeFragment());
+            }
         });
     }
     private void replaceFragment(Fragment fragment){
@@ -58,8 +62,5 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frame_layout, fragment);
         ft.commit();
-    }
-    private void testButton(){
-        Log.d("TESTING 1", "Halo Lagi!");
     }
 }

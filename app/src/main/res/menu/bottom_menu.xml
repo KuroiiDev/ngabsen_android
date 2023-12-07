@@ -4,11 +4,10 @@
     <item
         android:id="@+id/absen"
         android:title="Absen"
-        android:icon="@drawable/add_icon_light"/>
+        android:icon="@drawable/absen_icon"/>
     <item
         android:id="@+id/home"
-        android:title="Home"
-        android:icon="@drawable/home_icon_light" />
+        android:title=""/>
     <item
         android:id="@+id/account"
         android:title="Account"

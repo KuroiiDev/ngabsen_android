@@ -3,16 +3,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/main"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:text="Home"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/white"/>
+        android:textSize="36sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="sans-serif-condensed-light"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="180dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp"
+        android:background="@drawable/custom_edittexts"
+        app:cardBackgroundColor="#EAEAEA">
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/custom_edittexts">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:padding="24dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Smkn 5 Surakarta"
+                android:textSize="36sp"
+                android:textColor="#6C63FF"
+                android:fontFamily="sans-serif-condensed-light"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Smk Bisa! Smk Hebat!"
+                android:textSize="20sp"
+                android:textColor="#4841B3"
+                android:fontFamily="sans-serif-condensed-light"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="40dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/custom_edittexts">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:padding="24dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Carousel"
+                android:textSize="30sp"
+                android:textColor="#5D55DA"
+                android:fontFamily="sans-serif-condensed-light"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="40dp"
+        android:layout_marginTop="480dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/custom_edittexts">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:padding="24dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Gambar Gaje"
+                android:textSize="30sp"
+                android:textColor="#5D55DA"
+                android:fontFamily="sans-serif-condensed-light"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </FrameLayout>
