@@ -1,9 +1,96 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:background="@color/main"
     tools:context=".AbsenFragment">
-</fragment>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="NgabSen"
+        android:textSize="40sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="sans-serif-condensed-light"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Absen Kapanpun, Dimanapun. Dengan Mudah"
+        android:textSize="20sp"
+        android:textColor="#2E2151"
+        android:layout_marginTop="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="sans-serif-condensed-light"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="400dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp"
+        android:background="@drawable/custom_edittexts"
+        app:cardBackgroundColor="#EAEAEA">
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="40dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/custom_edittexts">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:padding="24dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Absen Yuk!"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                android:textColor="#6C63FF"
+                android:fontFamily="sans-serif-condensed-light"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Sangat Mudah Dan Efisien Lho!"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="#4841B3"
+                android:fontFamily="sans-serif-condensed-light"/>
+            <Button
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="30dp"
+                android:id="@+id/btnAbsen"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Absen"
+                android:textSize="18sp"
+                android:backgroundTint="@color/button_background_color"
+                android:textColor="@color/button_text_color"
+                app:cornerRadius = "20dp"
+                android:drawableRight="@drawable/play_icon"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="256dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="130dp"
+        android:src="@drawable/person_b"/>
+</FrameLayout>

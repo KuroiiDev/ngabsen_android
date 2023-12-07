@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.absen:
                         //replaceFragment(new HomeFragment());
-                        startActivity(new Intent(getApplicationContext(), MapActivity.class));
+                        replaceFragment(new AbsenFragment());
                         break;
                     case R.id.account:
                         replaceFragment(new AccountFragment());
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 replaceFragment(new HomeFragment());
+                binding.bottomNavigationView.setSelectedItemId(R.id.home);
             }
         });
     }
