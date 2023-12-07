@@ -7,10 +7,12 @@ import androidx.core.app.ActivityCompat;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +29,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.example.ngab_sen.databinding.ActivityMapBinding;
+import com.google.android.gms.tasks.Task;
+
+import java.util.Map;
+import java.util.HashMap;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GetAddressTask.OnTaskCompleted {
 
@@ -37,8 +50,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private ActivityMapBinding binding;
     static final int REQUEST_LOCATION_PERMISSION=1;
     private Spinner spinner;
+    private EditText editNama, editAbsen;
+    String gkelas = "";
+    private Button btnAbsen;
     FusedLocationProviderClient fusedLocationProviderClient;
+    FirebaseFirestore db;
     Marker mm;
+    String getLat, getLng = "No Location";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +83,74 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                    Toast.makeText(getApplicationContext(), adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                    gkelas = adapter.getItem(position).toString();
+                    //Toast.makeText(getApplicationContext(), adapter.getItem(position), Toast.LENGTH_SHORT).show();
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
 
                 }
             });
+            editNama = findViewById(R.id.namaLengkap);
+            editAbsen = findViewById(R.id.noAbsen);
+            btnAbsen = findViewById(R.id.absen);
+
+            db = FirebaseFirestore.getInstance();
+
+            btnAbsen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    insertData(gkelas);
+                }
+            });
         }
+    }
+    private void insertData(String getKelas){
+        btnAbsen.setActivated(false);
+        String nama = editNama.getText().toString();
+        String kelas = getKelas;
+        String absen = editAbsen.getText().toString();
+        Date getDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YY");
+        String date = sdf.format(getDate);
+        boolean isExisted = false;
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("nama", nama);
+        data.put("kelas", kelas);
+        data.put("absen", absen);
+        data.put("lat", getLat);
+        data.put("lng", getLng);
+        //data.put("tanggal", date);
+        Log.d("DataLah", nama+"_"+kelas+"_"+absen+"_"+date);
+        DocumentReference dr = db.collection("Absensi").document(kelas).collection(date).document(absen);
+        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        Toast.makeText(getApplicationContext(),"Anda Telah Absen Sebelumnya Hari Ini!!!",Toast.LENGTH_SHORT).show();
+                        editNama.setText("");
+                        editAbsen.setText("");
+                    }else {
+                        db.collection("Absensi").document(kelas).collection(date).document(absen).set(data).addOnCompleteListener(new OnCompleteListener<Void>(){
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(getApplicationContext(),"Sukses!",Toast.LENGTH_SHORT).show();
+                                    editNama.setText("");
+                                    editAbsen.setText("");
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"Gagal!",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        btnAbsen.setActivated(true);
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -93,7 +171,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     Location location = locationResult.getLastLocation();
                     if (location != null) {
                         String lat = location.getLatitude()+"";
+                        getLat = lat;
                         String lng = location.getLongitude()+"";
+                        getLng = lng;
                         LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
                         mm =mMap.addMarker(new MarkerOptions().position(loc).title("LAT: "+lat+" - LNG: "+lng));
                         float zoom = 15;
