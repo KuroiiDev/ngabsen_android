@@ -123,7 +123,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         data.put("lng", getLng);
         //data.put("tanggal", date);
         Log.d("DataLah", nama+"_"+kelas+"_"+absen+"_"+date);
-        DocumentReference dr = db.collection("Absensi").document(kelas).collection(date).document(absen);
+        DocumentReference dr = db.collection("Absensi").document(date).collection(kelas).document(absen);
         dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -134,7 +134,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         editNama.setText("");
                         editAbsen.setText("");
                     }else {
-                        db.collection("Absensi").document(kelas).collection(date).document(absen).set(data).addOnCompleteListener(new OnCompleteListener<Void>(){
+                        db.collection("Absensi").document(date).collection(kelas).document(absen).set(data).addOnCompleteListener(new OnCompleteListener<Void>(){
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
