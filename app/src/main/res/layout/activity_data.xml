@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
+    tools:context=".DataActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg_login"
+    android:background="@color/main"
     android:paddingHorizontal="10dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
         android:layout_marginHorizontal="20dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="30dp"
@@ -29,32 +29,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Register"
-                android:textSize="36sp"
-                android:textColor="#6C63FF"
-                android:textAlignment="center"
+                android:text="Edit "
+                android:textSize="30sp"
+                android:textColor="#C07CFB"
                 android:fontFamily="sans-serif-condensed-light"/>
-            <EditText
-                android:id="@+id/email"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/custom_edittexts"
-                android:inputType="textEmailAddress"
-                android:drawableLeft="@drawable/email_icon"
-                android:drawablePadding="8dp"
-                android:hint="Email Address"
-                android:padding="8dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:id="@+id/header"
+                android:text="Example@ns.com"
+                android:textSize="20sp"
+                android:textColor="#A655ED"
+                android:fontFamily="sans-serif-condensed-light"/>
             <EditText
                 android:id="@+id/nama"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/custom_edittexts"
+                android:background="@drawable/custom_absen"
                 android:inputType="text"
                 android:drawableLeft="@drawable/account_icon_light"
                 android:drawablePadding="8dp"
                 android:hint="Nama Lengkap"
-                android:drawableTint="#4741A6"
+                android:drawableTint="#A35EDF"
                 android:padding="8dp"
                 android:layout_marginTop="20dp"/>
             <Spinner
@@ -62,51 +59,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/custom_edittexts"
+                android:background="@drawable/custom_absen"
                 android:minHeight="50dp" />
             <EditText
                 android:id="@+id/absen"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/custom_edittexts"
+                android:background="@drawable/custom_absen"
                 android:inputType="number"
                 android:drawableLeft="@drawable/absen_icon"
-                android:drawableTint="#4741A6"
+                android:drawableTint="#A35EDF"
                 android:drawablePadding="8dp"
                 android:hint="No Absen"
-                android:padding="8dp"
-                android:layout_marginTop="20dp"/>
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/custom_edittexts"
-                android:inputType="textPassword"
-                android:drawableLeft="@drawable/password_icon"
-                android:drawablePadding="8dp"
-                android:hint="Password"
-                android:padding="8dp"
-                android:layout_marginTop="20dp"/>
-            <EditText
-                android:id="@+id/con_password"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/custom_edittexts"
-                android:inputType="textPassword"
-                android:drawableLeft="@drawable/password_icon"
-                android:drawablePadding="8dp"
-                android:hint="Confirm Password"
                 android:padding="8dp"
                 android:layout_marginTop="20dp"/>
             <Button
                 android:layout_marginTop="30dp"
                 android:layout_marginHorizontal="25dp"
-                android:id="@+id/register"
+                android:id="@+id/update"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Register"
+                android:text="Update Akun"
                 android:textSize="18sp"
-                android:backgroundTint="@color/button_background_color"
+                android:backgroundTint="@color/absen_background_color"
                 android:textColor="@color/button_text_color"
                 app:cornerRadius = "20dp"
                 android:drawableRight="@drawable/add_person_icon"/>
@@ -118,23 +93,6 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="9dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="30dp"
-        android:background="@drawable/custom_edittexts">
-        <TextView
-            android:layout_margin="10dp"
-            android:id="@+id/textLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sudah Memiliki Akun? Login dengan akun Anda!"
-            android:textAlignment="center"/>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

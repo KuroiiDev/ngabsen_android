@@ -32,35 +32,42 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/namaLengkap"
+            android:id="@+id/namaT"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/custom_absen"
             android:drawableLeft="@drawable/nama_icon"
+            android:drawableTint="@color/purple_200"
             android:drawablePadding="8dp"
             android:hint="Nama Lengkap"
-            android:inputType="text"
+            android:editable="false"
             android:padding="8dp" />
 
-        <Spinner
-            android:id="@+id/spinKelas"
+        <EditText
+            android:id="@+id/kelasT"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/custom_absen"
-            android:minHeight="50dp" />
+            android:drawableLeft="@drawable/kelas_icon"
+            android:drawableTint="@color/purple_200"
+            android:drawablePadding="8dp"
+            android:hint="Kelas"
+            android:editable="false"
+            android:padding="8dp" />
 
         <EditText
-            android:id="@+id/noAbsen"
+            android:id="@+id/absenT"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/custom_absen"
             android:drawableLeft="@drawable/absen_icon"
             android:drawablePadding="8dp"
+            android:drawableTint="@color/purple_200"
             android:hint="No Absen"
-            android:inputType="numberDecimal"
+            android:editable="false"
             android:padding="8dp" />
 
         <Button

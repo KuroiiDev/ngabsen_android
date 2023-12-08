@@ -1,5 +1,6 @@
 package com.example.ngab_sen;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,23 +13,60 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ngab_sen.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     FloatingActionButton btnHome;
+    FirebaseUser user;
+    FirebaseFirestore db;
+    FirebaseAuth auth;
+    private static String userEmail, userNama, userKelas, userAbsen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
+        if (user == null) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        }else {
+            userEmail = user.getEmail();
+            DocumentReference dr = db.collection("Akun").document(user.getEmail());
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot doc = task.getResult();
+                        if (doc.exists()) {
+                            userNama = doc.get("nama").toString();
+                            userKelas = doc.get("kelas").toString();
+                            userAbsen = doc.get("absen").toString();
+                        }
+                    }
+                }
+
+            });
+        }
+
         getSupportActionBar().hide();
         replaceFragment(new HomeFragment());
         Log.d("TESTING 1", "Halo!");
@@ -49,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
         });
+
         btnHome = findViewById(R.id.btnHome);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +97,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public static String getUserEmail() {
+        return userEmail;
+    }
+
+    public static String getUserNama() {
+        return userNama;
+    }
+
+    public static String getUserKelas() {
+        return userKelas;
+    }
+
+    public static String getUserAbsen() {
+        return userAbsen;
+    }
+
     private void replaceFragment(Fragment fragment){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

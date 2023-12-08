@@ -36,6 +36,8 @@ import com.google.android.gms.tasks.Task;
 import java.util.Map;
 import java.util.HashMap;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,14 +51,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private TextView locationTextView;
     private ActivityMapBinding binding;
     static final int REQUEST_LOCATION_PERMISSION=1;
-    private Spinner spinner;
-    private EditText editNama, editAbsen;
-    String gkelas = "";
     private Button btnAbsen;
     FusedLocationProviderClient fusedLocationProviderClient;
+    FirebaseUser user;
     FirebaseFirestore db;
+    FirebaseAuth auth;
+    EditText editNama, editKelas, editAbsen;
     Marker mm;
     String getLat, getLng = "No Location";
+    String nama, kelas, absen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,58 +75,64 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        spinner = (Spinner) findViewById(R.id.spinKelas);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.kelas, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        btnAbsen = findViewById(R.id.absen);
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
-        if (spinner == null) {
-            Toast.makeText(getApplicationContext(), "Spinner Null!!!", Toast.LENGTH_SHORT).show();
-        }else {
-            spinner.setAdapter(adapter);
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                    gkelas = adapter.getItem(position).toString();
-                    //Toast.makeText(getApplicationContext(), adapter.getItem(position), Toast.LENGTH_SHORT).show();
+        editNama = findViewById(R.id.namaT);
+        editKelas = findViewById(R.id.kelasT);
+        editAbsen = findViewById(R.id.absenT);
+
+        DocumentReference drs = db.collection("Akun").document(user.getEmail());
+        drs.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task1) {
+                if (task1.isSuccessful()) {
+                    DocumentSnapshot doc1 = task1.getResult();
+                    if (doc1.exists()) {
+                        nama = doc1.get("nama").toString();
+                        kelas = doc1.get("kelas").toString();
+                        absen = doc1.get("absen").toString();
+
+                        editNama.setText(nama);
+                        editKelas.setText(kelas);
+                        editAbsen.setText(absen);
+                    }
                 }
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
+            }
+        });
+        btnAbsen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    insertData();
                 }
-            });
-            editNama = findViewById(R.id.namaLengkap);
-            editAbsen = findViewById(R.id.noAbsen);
-            btnAbsen = findViewById(R.id.absen);
-
-            db = FirebaseFirestore.getInstance();
-
-            btnAbsen.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    insertData(gkelas);
-                }
-            });
-        }
+        });
     }
-    private void insertData(String getKelas){
+    private void insertData(){
         btnAbsen.setActivated(false);
-        String nama = editNama.getText().toString();
-        String kelas = getKelas;
-        String absen = editAbsen.getText().toString();
+
         Date getDate = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YY");
-        String date = sdf.format(getDate);
+        String date = new SimpleDateFormat("dd-MM-YY").format(getDate);
+        String time = new SimpleDateFormat("hh:mm").format(getDate);
         boolean isExisted = false;
+
+        if (nama == null || kelas == null || absen == null ){
+            Toast.makeText(getApplicationContext(),"Kesalahan!",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Map<String, Object> data = new HashMap<>();
         data.put("nama", nama);
         data.put("kelas", kelas);
         data.put("absen", absen);
+        data.put("waktu", time);
         data.put("lat", getLat);
         data.put("lng", getLng);
-        //data.put("tanggal", date);
+
         Log.d("DataLah", nama+"_"+kelas+"_"+absen+"_"+date);
         DocumentReference dr = db.collection("Absensi").document(date).collection(kelas).document(absen);
+
         dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -131,16 +140,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     DocumentSnapshot doc = task.getResult();
                     if (doc.exists()) {
                         Toast.makeText(getApplicationContext(),"Anda Telah Absen Sebelumnya Hari Ini!!!",Toast.LENGTH_SHORT).show();
-                        editNama.setText("");
-                        editAbsen.setText("");
                     }else {
                         db.collection("Absensi").document(date).collection(kelas).document(absen).set(data).addOnCompleteListener(new OnCompleteListener<Void>(){
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
                                     Toast.makeText(getApplicationContext(),"Sukses!",Toast.LENGTH_SHORT).show();
-                                    editNama.setText("");
-                                    editAbsen.setText("");
                                 }else{
                                     Toast.makeText(getApplicationContext(),"Gagal!",Toast.LENGTH_SHORT).show();
                                 }
