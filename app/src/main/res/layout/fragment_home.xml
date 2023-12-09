@@ -120,7 +120,7 @@
                 android:textStyle="bold"
                 android:text="Anda Sudah Absen!"
                 android:textSize="30sp"
-                android:textColor="#049A00"
+                android:textColor="@color/done"
                 android:fontFamily="sans-serif-condensed-light"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
