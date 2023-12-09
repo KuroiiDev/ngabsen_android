@@ -118,9 +118,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Anda Sudah Absen!"
-                android:textSize="30sp"
-                android:textColor="@color/done"
+                android:text="Status Absen"
+                android:textSize="25sp"
+                android:textAlignment="center"
+                android:textColor="#5A5A5A"
                 android:fontFamily="sans-serif-condensed-light"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
