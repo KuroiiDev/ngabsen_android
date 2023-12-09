@@ -1,20 +1,28 @@
 package com.example.ngab_sen;
 
+import static com.example.ngab_sen.MapActivity.REQUEST_LOCATION_PERMISSION;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,26 +42,27 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class HistoryActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, OnMapReadyCallback {
+public class HistoryActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener /*, OnMapReadyCallback*/ {
 
     EditText tanggalText;
     FirebaseFirestore db;
     Button button;
     String date;
     TextView textNama, textKelas, textAbsen, textJam, textLat, textLng, textStatus;
-    String nama,kelas,absen,jam, lat,lng = "-";
+    String nama= "-", kelas= "-", absen= "-", jam= "-", lat= "-", lng = "-";
+    ProgressBar pg;
     Marker mm;
     boolean ready = false;
     private GoogleMap gMap;
-    FusedLocationProviderClient fusedLocationProviderClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.id_map);
-        mapFragment.getMapAsync(this);
+        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.id_map);
+        mapFragment.getMapAsync(this);*/
 
         tanggalText = findViewById(R.id.tanggal);
         button = findViewById(R.id.cari);
@@ -64,6 +73,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         textLat = findViewById(R.id.textLat);
         textLng = findViewById(R.id.textLng);
         textStatus = findViewById(R.id.textStatus);
+        pg = findViewById(R.id.progressBar);
         tanggalText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,8 +89,9 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                     Toast.makeText(getApplicationContext(), "Mohon Isi Tanggal", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                pg.setVisibility(View.VISIBLE);
                 DocumentReference dr = db.collection("Absensi").document(date).collection(MainActivity.getUserKelas()).document(MainActivity.getUserAbsen());
-                dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
+                dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
@@ -92,38 +103,39 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                                 jam = doc.get("waktu").toString();
                                 lat = doc.get("lat").toString();
                                 lng = doc.get("lng").toString();
-                            }else {
+                            } else {
                                 Toast.makeText(getApplicationContext(), "Tidak Ada Data", Toast.LENGTH_SHORT).show();
-                                nama = "";
-                                kelas = "";
-                                absen = "";
-                                jam = "";
-                                lat = "";
+                                nama = "-";
+                                kelas = "-";
+                                absen = "-";
+                                jam = "-";
+                                lat = "-";
                                 lng = "-";
                             }
-                        }else {
+                        } else {
                             Toast.makeText(getApplicationContext(), "Gagal!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-                textNama.setText("Nama: "+nama);
-                textKelas.setText("Kelas: "+kelas);
-                textAbsen.setText("Absen: "+absen);
-                textJam.setText("Jam: "+jam);
-                textLat.setText("Latitude: "+lat);
-                textLng.setText("Longtitude: "+lng);
+                textNama.setText("Nama: " + nama);
+                textKelas.setText("Kelas: " + kelas);
+                textAbsen.setText("Absen: " + absen);
+                textJam.setText("Jam: " + jam);
+                textLat.setText("Latitude: " + lat);
+                textLng.setText("Longtitude: " + lng);
 
                 try {
                     Date date = new SimpleDateFormat("hh:mm a").parse(jam);
                     Date date2 = new SimpleDateFormat("hh:mm a").parse("07:00 AM");
-                    if(date.compareTo(date2)>=0) {
+                    if (date.compareTo(date2) >= 0) {
                         textStatus.setText("Status: Telat");
-                    }else {
+                    } else {
                         textStatus.setText("Status: Tidak Telat");
                     }
-                }catch (Exception e) {
+                } catch (Exception e) {
                     Log.e("DATE ERROR", e.getMessage());
                 }
+                pg.setVisibility(View.GONE);
             }
         });
     }
@@ -140,7 +152,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         tanggalText.setText(getDate);
     }
 
-    @Override
+    /*@Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         try {
             if (mm!=null){
@@ -153,5 +165,5 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
             Log.e("MAP ERROR", e.getMessage());
         }
 
-    }
+    }*/
 }

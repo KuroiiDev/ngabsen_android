@@ -48,7 +48,6 @@ import java.util.Date;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GetAddressTask.OnTaskCompleted {
 
     private GoogleMap mMap;
-    private TextView locationTextView;
     private ActivityMapBinding binding;
     static final int REQUEST_LOCATION_PERMISSION=1;
     private Button btnAbsen;
@@ -68,7 +67,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         binding = ActivityMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        locationTextView=findViewById(R.id.Lokasi);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -211,6 +209,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onTaskCompleted(String result){
-        locationTextView.setText("Alamat: "+result);
+
     }
 }
