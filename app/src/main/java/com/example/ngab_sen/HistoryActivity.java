@@ -14,11 +14,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,7 +42,10 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
     String date;
     TextView textNama, textKelas, textAbsen, textJam, textLat, textLng, textStatus;
     String nama,kelas,absen,jam, lat,lng = "-";
+    Marker mm;
+    boolean ready = false;
     private GoogleMap gMap;
+    FusedLocationProviderClient fusedLocationProviderClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,7 +124,6 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                 }catch (Exception e) {
                     Log.e("DATE ERROR", e.getMessage());
                 }
-
             }
         });
     }
@@ -139,8 +143,11 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         try {
+            if (mm!=null){
+                mm.remove();
+            }
             LatLng location = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-            googleMap.addMarker(new MarkerOptions().position(location).title("Titik Absen"));
+            mm = googleMap.addMarker(new MarkerOptions().position(location).title("Titik Absen"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12));
         }catch (Exception e){
             Log.e("MAP ERROR", e.getMessage());
