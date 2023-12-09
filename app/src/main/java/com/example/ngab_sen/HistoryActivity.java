@@ -48,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.id_map);
-        mapFragment.getMapAsync();
+        mapFragment.getMapAsync(this);
 
         tanggalText = findViewById(R.id.tanggal);
         button = findViewById(R.id.cari);
