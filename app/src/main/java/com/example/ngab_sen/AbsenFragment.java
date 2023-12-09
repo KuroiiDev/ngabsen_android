@@ -30,17 +30,24 @@ import com.google.android.gms.tasks.Task;
 
 public class AbsenFragment extends Fragment {
 
-    Button button;
+    Button button, button2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_absen, null);
 
         button = (Button) root.findViewById(R.id.btnAbsen);
+        button2 = (Button) root.findViewById(R.id.btnHistory);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity().getApplicationContext(), MapActivity.class));
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity().getApplicationContext(), HistoryActivity.class));
             }
         });
 
