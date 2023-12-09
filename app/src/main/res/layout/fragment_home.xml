@@ -62,51 +62,57 @@
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="40dp"
         android:layout_marginTop="250dp"
         android:layout_marginHorizontal="20dp"
         android:background="@drawable/custom_edittexts">
-        <LinearLayout
+        <ViewFlipper
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="top"
-            android:padding="24dp">
-            <TextView
+            android:layout_height="match_parent"
+            android:autoStart="true"
+            android:flipInterval="2000"
+            android:inAnimation="@android:anim/slide_in_left"
+            android:outAnimation="@android:anim/slide_out_right">
+
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Carousel"
-                android:textSize="30sp"
-                android:textColor="#5D55DA"
-                android:fontFamily="sans-serif-condensed-light"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="40dp"
-        android:layout_marginTop="480dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/custom_edittexts">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="top"
-            android:padding="24dp">
-            <TextView
+                android:layout_height="match_parent"
+                android:src="@mipmap/image_1"/>
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Gambar Gaje"
-                android:textSize="30sp"
-                android:textColor="#5D55DA"
-                android:fontFamily="sans-serif-condensed-light"/>
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:src="@mipmap/image_2"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/image_3"/>
+        </ViewFlipper>
     </androidx.cardview.widget.CardView>
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="200dp"-->
+<!--        app:cardCornerRadius="30dp"-->
+<!--        app:cardElevation="40dp"-->
+<!--        android:layout_marginTop="480dp"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        android:background="@drawable/custom_edittexts">-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_gravity="top"-->
+<!--            android:padding="24dp">-->
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="Gambar Gaje"-->
+<!--                android:textSize="30sp"-->
+<!--                android:textColor="#5D55DA"-->
+<!--                android:fontFamily="sans-serif-condensed-light"/>-->
+<!--        </LinearLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
 
 </FrameLayout>
