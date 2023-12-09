@@ -114,7 +114,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         Date getDate = new Date();
         String date = new SimpleDateFormat("dd-MM-YY").format(getDate);
-        String time = new SimpleDateFormat("hh:mm").format(getDate);
+        String time = new SimpleDateFormat("hh:mm a").format(getDate);
         boolean isExisted = false;
 
         if (nama == null || kelas == null || absen == null ){
