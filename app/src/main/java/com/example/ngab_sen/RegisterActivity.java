@@ -140,8 +140,6 @@ public class RegisterActivity extends AppCompatActivity {
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()){
                                                             Toast.makeText(getApplicationContext(),"Sukses!",Toast.LENGTH_SHORT).show();
-                                                            editNama.setText("");
-                                                            editAbsen.setText("");
                                                         }else{
                                                             Toast.makeText(getApplicationContext(),"CreateUserWithEmail failed",Toast.LENGTH_SHORT).show();
                                                         }
@@ -151,10 +149,12 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-
                                 Log.d(TAG, "CreateUserWithEmail:success");
                                 Toast.makeText(getApplicationContext(), "Akun Dibuat!", Toast.LENGTH_SHORT);
                                 FirebaseUser user = mAuth.getCurrentUser();
+
+                                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                finish();
                                 //updateUI(user);
                             } else {
                                 Log.d(TAG, "CreateUserWithEmail:failed");
